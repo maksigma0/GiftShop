@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Избранное — Сладкий Мир{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Избранное</h1>
+
+  {% if products %}
+    <div class="cart-total">Итого: <span id="wishlist-total-value">{{ total|floatformat:2 }} BYN</span></div>
+
+    <div class="product-grid wishlist-grid">
+      {% for product in products %}
+        <div class="product-card" data-price="{{ product.price }}">
+          <a class="product-image-wrap" href="{{ product.get_absolute_url }}">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+              <div class="product-image-placeholder">🎁</div>
+            {% endif %}
+            {% if product.available %}
+              <span class="product-badge badge-in">В наличии</span>
+            {% else %}
+              <span class="product-badge badge-out">Нет в наличии</span>
+            {% endif %}
+          </a>
+          <div class="product-body">
+            <h3 class="product-name">
+              <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            </h3>
+            <div class="product-price">{{ product.price|floatformat:2 }} BYN</div>
+            <div class="product-actions">
+              <form method="post" action="{% url 'wishlist_remove' %}">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="submit" class="btn-wishlist active" title="Убрать из избранного">♥</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="cart-empty">
+      <div class="cart-empty-icon">♡</div>
+      <h2>У вас пока нет избранных товаров</h2>
+      <p>Отмечайте сердечком то, что нравится!</p>
+      <a href="{% url 'product_list' %}" class="btn-primary">Перейти в каталог</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

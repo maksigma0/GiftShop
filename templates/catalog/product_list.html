@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% if category %}{{ category.name }}{% else %}Каталог{% endif %} — Сладкий Мир{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1 style="font-family: 'Lobster', cursive; font-size: 56px; color: var(--primary); margin-bottom: 8px; text-shadow: 0 2px 10px rgba(212,160,23,0.2);">Сладкий Мир</h1>
+  <p>Продукты и подарки с душой</p>
+</section>
+
+<div class="container">
+  <nav class="category-chips">
+    <a href="{% url 'product_list' %}" class="chip {% if not category %}active{% endif %}">Все</a>
+    {% for c in categories %}
+      <a href="{% url 'product_list_by_category' c.slug %}"
+         class="chip {% if category and category.slug == c.slug %}active{% endif %}">{{ c.name }}</a>
+    {% endfor %}
+  </nav>
+
+  {% if query %}
+    <p class="search-note">Поиск: «<strong>{{ query }}</strong>» — найдено {{ page_obj.paginator.count }} шт.</p>
+  {% endif %}
+
+  {% if products %}
+    <div class="product-grid">
+      {% for product in products %}
+        <div class="product-card">
+          <a class="product-image-wrap" href="{{ product.get_absolute_url }}">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+              <div class="product-image-placeholder">🎁</div>
+            {% endif %}
+            {% if product.available %}
+              <span class="product-badge badge-in">В наличии</span>
+            {% else %}
+              <span class="product-badge badge-out">Нет в наличии</span>
+            {% endif %}
+          </a>
+          <div class="product-body">
+            <h3 class="product-name">
+              <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            </h3>
+            <div class="product-cat">{{ product.category.name }}</div>
+            <div class="product-price">{{ product.price|floatformat:2 }} BYN</div>
+            {% if product.weight %}
+              <div class="product-weight">Вес: {{ product.weight|floatformat:2 }} кг</div>
+            {% endif %}
+            <div class="product-actions">
+              {% if product.id in wishlist %}
+                <form method="post" action="{% url 'wishlist_remove' %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="product_id" value="{{ product.id }}">
+                  <input type="hidden" name="next" value="{{ request.path }}">
+                  <button type="submit" class="btn-wishlist active" title="Убрать из избранного">♥</button>
+                </form>
+              {% else %}
+                <form method="post" action="{% url 'wishlist_add' %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="product_id" value="{{ product.id }}">
+                  <input type="hidden" name="next" value="{{ request.path }}">
+                  <button type="submit" class="btn-wishlist" title="В избранное">♡</button>
+                </form>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if page_obj.has_other_pages %}
+      <nav class="pagination">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query|urlencode }}{% endif %}">← Назад</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+          {% if num == page_obj.number %}
+            <span class="current">{{ num }}</span>
+          {% else %}
+            <a href="?page={{ num }}{% if query %}&q={{ query|urlencode }}{% endif %}">{{ num }}</a>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query|urlencode }}{% endif %}">Вперёд →</a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <p class="empty">
+      {% if query %}
+        По запросу «{{ query }}» ничего не нашлось. Попробуйте другое название.
+      {% else %}
+        В этой категории пока нет товаров. Загляните позже!
+      {% endif %}
+    </p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,457 @@
+/* MakSigma Control Panel — светлая тема в стиле iOS */
+
+/* ===== Переменные Django admin: админка всегда светлая ===== */
+:root,
+html[data-theme="light"],
+html[data-theme="dark"],
+html[data-theme="auto"] {
+  --primary: #4a7a5a !important;
+  --secondary: #f7f7f9 !important;
+  --accent: #4a7a5a !important;
+  --primary-fg: #ffffff !important;
+
+  --body-fg: #1c1c1e !important;
+  --body-bg: #f2f2f7 !important;
+  --body-quiet-color: #6e6e73 !important;
+  --body-medium-color: #48484a !important;
+  --body-loud-color: #000000 !important;
+
+  --header-bg: #ffffff !important;
+  --header-color: #1c1c1e !important;
+  --header-branding-color: #1c1c1e !important;
+  --header-link-color: #4a7a5a !important;
+
+  --breadcrumbs-bg: #f2f2f7 !important;
+  --breadcrumbs-fg: #6e6e73 !important;
+  --breadcrumbs-link-fg: #4a7a5a !important;
+
+  --link-fg: #3d6b4a !important;
+  --link-hover-color: #2f5540 !important;
+  --link-selected-fg: #3d6b4a !important;
+
+  --hairline-color: #e5e5ea !important;
+  --border-color: #e0e0e5 !important;
+  --error-fg: #b3261e !important;
+
+  --darkened-bg: #f7f7f9 !important;
+  --selected-bg: #eaf2ec !important;
+  --selected-row: #eaf2ec !important;
+
+  --button-bg: #4a7a5a !important;
+  --button-fg: #ffffff !important;
+  --button-hover-bg: #3d6b4a !important;
+  --default-button-bg: #4a7a5a !important;
+  --default-button-hover-bg: #3d6b4a !important;
+  --close-button-bg: #8e8e93 !important;
+  --close-button-hover-bg: #6e6e73 !important;
+  --delete-button-bg: #b3261e !important;
+  --delete-button-hover-bg: #8f1e17 !important;
+  --object-tools-bg: #8e8e93 !important;
+  --object-tools-hover-bg: #6e6e73 !important;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, sans-serif;
+  background: #f2f2f7;
+  color: #1c1c1e;
+}
+
+/* Переключатель темы не нужен — админка всегда светлая */
+.theme-toggle {
+  display: none !important;
+}
+
+/* ===== Шапка ===== */
+#header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid #e5e5ea;
+  color: #1c1c1e;
+  padding: 12px 24px;
+}
+
+#branding h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+#branding h1 a {
+  color: #1c1c1e;
+  text-decoration: none;
+}
+
+#branding h1 a:hover {
+  color: #3d6b4a;
+}
+
+#user-tools {
+  color: #6e6e73;
+  font-size: 13px;
+}
+
+#user-tools a {
+  color: #4a7a5a;
+  transition: color 0.2s ease;
+}
+
+#user-tools a:hover {
+  color: #2f5540;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 6px;
+}
+
+.admin-nav a {
+  color: #3d6b4a;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 7px 14px;
+  border-radius: 10px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.admin-nav a:hover {
+  background: #eaf2ec;
+}
+
+/* ===== Хлебные крошки ===== */
+div.breadcrumbs {
+  background: transparent;
+  border: none;
+  color: #6e6e73;
+  padding: 16px 24px 0;
+  font-size: 13px;
+}
+
+div.breadcrumbs a {
+  color: #4a7a5a;
+}
+
+/* ===== Контент ===== */
+#content {
+  padding: 20px 24px 40px;
+}
+
+#content h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+/* ===== Таблица списка (iOS inset grouped) ===== */
+#changelist .results {
+  background: #ffffff;
+  border: 1px solid #e5e5ea;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+#result_list {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+#result_list thead th {
+  background: #f7f7f9;
+  color: #6e6e73;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e5ea;
+}
+
+#result_list thead th a {
+  color: #6e6e73;
+}
+
+#result_list tbody td,
+#result_list tbody th {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f3;
+  font-size: 14px;
+  color: #1c1c1e;
+}
+
+#result_list tbody tr:last-child td,
+#result_list tbody tr:last-child th {
+  border-bottom: none;
+}
+
+#result_list tbody tr:hover {
+  background: #fafafc;
+}
+
+#result_list tbody tr.selected {
+  background: #eaf2ec;
+}
+
+/* Миниатюра товара */
+.list-preview {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  display: block;
+}
+
+/* ===== Действия и поиск ===== */
+.actions {
+  background: #ffffff;
+  border: 1px solid #e5e5ea;
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  margin-bottom: 20px;
+}
+
+.actions select,
+.actions input {
+  border-radius: 10px;
+}
+
+#changelist-search {
+  padding: 16px 0;
+}
+
+#changelist-search input[type="text"] {
+  border: 1px solid #e0e0e5;
+  border-radius: 10px;
+  padding: 9px 14px;
+  min-width: 260px;
+}
+
+/* ===== Кнопки ===== */
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover,
+input[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 122, 90, 0.25);
+}
+
+.submit-row {
+  background: #ffffff;
+  border: 1px solid #e5e5ea;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* ===== Фильтры сбоку ===== */
+#changelist-filter {
+  background: #ffffff;
+  border: 1px solid #e5e5ea;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+#changelist-filter h2 {
+  background: #f7f7f9;
+  color: #6e6e73;
+  border-bottom: 1px solid #e5e5ea;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 12px 16px;
+  margin: 0;
+}
+
+#changelist-filter h3 {
+  color: #6e6e73;
+  font-size: 13px;
+  padding: 0 16px;
+}
+
+#changelist-filter ul {
+  padding: 0 16px 12px;
+}
+
+#changelist-filter li a {
+  display: block;
+  padding: 6px 0;
+  color: #1c1c1e;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+#changelist-filter li a:hover {
+  color: #4a7a5a;
+}
+
+#changelist-filter li.selected a {
+  color: #3d6b4a;
+  font-weight: 600;
+}
+
+/* ===== Пагинация ===== */
+.paginator {
+  background: transparent;
+  border: none;
+  color: #6e6e73;
+  padding: 16px 0;
+}
+
+.paginator a {
+  color: #4a7a5a;
+}
+
+/* ===== Сообщения ===== */
+.messagelist li {
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  list-style: none;
+}
+
+.messagelist li.success {
+  background: #eaf2ec;
+  color: #2f5540;
+}
+
+.messagelist li.warning {
+  background: #fdf6e3;
+  color: #8a6d1f;
+}
+
+.messagelist li.error {
+  background: #fdecea;
+  color: #b3261e;
+}
+
+/* ===== Дашборд и модули ===== */
+.module {
+  background: #ffffff;
+  border: 1px solid #e5e5ea;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  margin-bottom: 20px;
+}
+
+.module h2,
+.module caption,
+.inline-group h2 {
+  background: #f7f7f9;
+  color: #6e6e73;
+  border-bottom: 1px solid #e5e5ea;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.dashboard .module table th {
+  background: transparent;
+}
+
+.dashboard .module table td,
+.dashboard .module table th {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f3;
+}
+
+.dashboard .module table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== Формы ===== */
+.form-row {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f3;
+}
+
+.form-row:last-child {
+  border-bottom: none;
+}
+
+label {
+  color: #1c1c1e;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+textarea,
+select,
+.vTextField,
+.vLargeTextField {
+  background: #ffffff;
+  color: #1c1c1e;
+  border: 1px solid #e0e0e5;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #4a7a5a;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 122, 90, 0.15);
+}
+
+.help {
+  color: #6e6e73;
+  font-size: 12px;
+}
+
+/* ===== Инлайны ===== */
+.inline-related {
+  border: 1px solid #e5e5ea;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.inline-related h3 {
+  background: #f7f7f9;
+  border-bottom: 1px solid #e5e5ea;
+  padding: 10px 16px;
+  font-weight: 600;
+}
+
+/* ===== Страница входа ===== */
+.login #container {
+  background: #ffffff;
+  border: 1px solid #e5e5ea;
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.login .submit-row {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}

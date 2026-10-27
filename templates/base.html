@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{% static 'css/variables.css' %}">
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
   {% block extra_css %}{% endblock %}
   <script>
     (function() {
@@ -22,9 +23,9 @@
 <body>
   <header>
     <div class="container header-inner">
-      <a href="/" class="logo">Сладкий Мир</a>
+      <a href="{% url 'home' %}" class="logo">Сладкий Мир</a>
       <nav class="main-nav">
-        <a href="/">Главная</a>
+        <a href="{% url 'home' %}">Главная</a>
         <a href="{% url 'product_list' %}">Каталог</a>
       </nav>
       <form class="header-search" method="get" action="{% url 'product_list' %}" role="search">
@@ -59,21 +60,25 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">Сладкий Мир</div>
-        <p>Маленький магазин продуктов и подарков в Сенно. Собираем то, что сами поставим на свой стол: сыры, колбасы, молочку, печенье и конфеты.</p>
+        <p>Магазин кондитерских изделий и новогодних подарков в городе Барань.</p>
       </div>
       <div class="footer-col">
         <h3>Каталог</h3>
-        <a href="{% url 'product_list' %}">Все товары</a>
-        <a href="{% url 'product_list_by_category' 'syry' %}">Сыры</a>
-        <a href="{% url 'product_list_by_category' 'kolbasy' %}">Колбасы и деликатесы</a>
-        <a href="{% url 'product_list_by_category' 'pechene-i-sladosti' %}">Печенье и сладости</a>
+        <a href="{% url 'product_list_by_category' 'konditerskie-izdeliya' %}">Кондитерские изделия</a>
+        <a href="{% url 'product_list_by_category' 'novogodnie-podarki' %}">Новогодние подарки</a>
       </div>
       <div class="footer-col">
         <h3>Контакты</h3>
-        <p class="footer-placeholder">Адрес уточняется</p>
-        <p class="footer-placeholder">Телефон уточняется</p>
-        <p class="footer-placeholder">Часы работы уточняются</p>
-        <a href="mailto:info@maksigma.by">info@maksigma.by</a>
+        <p>город Барань, улица Оршанская, павильон «Сладкий Мир»</p>
+        <div class="footer-phones">
+          <a href="tel:+375296953455">+375 29 695-34-55</a>
+          <a href="tel:+375292175643">+375 29 217-56-43</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Режим работы</h3>
+        <p>ПН-ПТ: 9:00 - 20:00</p>
+        <p>СБ-ВС: 9:00 - 18:00</p>
       </div>
     </div>
     <div class="footer-bottom">

@@ -30,7 +30,7 @@
         <span class="badge-out">Нет в наличии</span>
       {% endif %}
 
-      <div class="product-detail-price">{{ product.price|floatformat:2 }} BYN</div>
+      <div class="product-detail-price">{{ product.price|floatformat:2 }} <span class="nbrb-icon nbrb-icon-byn"></span></div>
       {% if product.weight %}
         <div class="product-weight">Вес: {{ product.weight|floatformat:2 }} кг</div>
       {% endif %}

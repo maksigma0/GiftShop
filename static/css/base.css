@@ -36,7 +36,7 @@ header {
 }
 
 [data-theme="dark"] header {
-  background: rgba(31, 28, 25, 0.85);
+  background: rgba(16, 22, 29, 0.85);
   border-bottom-color: var(--border);
 }
 
@@ -48,26 +48,22 @@ header {
   min-height: 68px;
 }
 
+/* Логотип-вывеска: зелёная плашка, белые буквы, бордовая обводка */
 .logo {
   font-family: var(--font-logo);
-  font-size: 30px;
-  color: var(--primary);
-  text-decoration: none;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
   letter-spacing: 0.5px;
+  color: var(--heading-color);
+  text-decoration: none;
+  white-space: nowrap;
   transition: var(--transition);
 }
 
 .logo:hover {
-  color: var(--primary-light);
+  color: var(--heading-color-hover);
   transform: scale(1.02);
-}
-
-[data-theme="dark"] .logo {
-  color: var(--primary);
-}
-
-[data-theme="dark"] .logo:hover {
-  color: var(--primary-light);
 }
 
 nav {
@@ -181,7 +177,7 @@ nav a:hover::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--primary);
+  border: 2px solid var(--surface);
 }
 
 .container {
@@ -194,19 +190,19 @@ nav a:hover::after {
 footer {
   background: var(--text);
   color: var(--bg);
-  padding: 60px 20px 40px;
+  padding: 64px 20px 32px;
   margin-top: 80px;
   transition: var(--transition);
 }
 
 [data-theme="dark"] footer {
-  background: #010409;
-  color: #8B949E;
+  background: #0C1117;
+  color: var(--text);
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.6fr 1fr 1.3fr 1fr;
   gap: 40px;
   max-width: 1280px;
   margin: 0 auto;
@@ -214,32 +210,65 @@ footer {
 
 .footer-col h3 {
   font-family: var(--font-heading);
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  margin-bottom: 16px;
   color: var(--gold);
+}
+
+.footer-col p {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin-bottom: 8px;
 }
 
 .footer-col a {
   color: var(--bg);
-  opacity: 0.7;
+  opacity: 0.75;
   text-decoration: none;
   display: block;
-  margin-bottom: 10px;
+  font-size: 14px;
+  margin-bottom: 8px;
   transition: var(--transition);
 }
 
 [data-theme="dark"] .footer-col a {
-  color: #8B949E;
+  color: var(--text);
 }
 
 .footer-col a:hover {
   opacity: 1;
   color: var(--gold);
+  transform: translateX(2px);
+}
+
+/* Телефоны — столбиком */
+.footer-phones {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.footer-phones a {
+  margin-bottom: 0;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+
+  .logo {
+    font-size: 28px;
   }
 
   .header-inner {
@@ -292,7 +321,7 @@ nav a {
 .header-search input[type="search"]:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(47, 125, 79, 0.15);
+  box-shadow: 0 0 0 3px rgba(156, 37, 66, 0.16);
 }
 
 .header-search button {
@@ -312,28 +341,25 @@ nav a {
   background: var(--primary-light);
 }
 
-/* ===== Подвал ===== */
+/* ===== Подвал: бренд ===== */
 .footer-brand {
   max-width: 380px;
 }
 
 .footer-logo {
-  font-family: var(--font-logo);
+  font-family: var(--font-heading);
   font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   color: var(--gold);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .footer-brand p {
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.65;
   opacity: 0.75;
-}
-
-.footer-placeholder {
-  font-size: 14px;
-  opacity: 0.6;
-  margin-bottom: 8px;
+  margin: 0;
 }
 
 .footer-bottom {
@@ -362,4 +388,40 @@ nav a {
     flex: 1;
     width: auto;
   }
+}
+
+/* ===== Знак белорусского рубля — официальный шрифт НБРБ ===== */
+@font-face {
+    font-family: "nbrb";
+    src: url("/static/fonts/nbrb.woff2") format("woff2"),
+         url("/static/fonts/nbrb.ttf") format("truetype"),
+         url("/static/fonts/nbrb.woff") format("woff");
+    unicode-range: U+E901, U+42, U+59, U+4E;
+}
+
+.nbrb-icon {
+    font-family: "nbrb" !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "liga";
+    font-variant-ligatures: discretionary-ligatures;
+    font-size: 1.25em;
+    margin-left: 4px;
+    vertical-align: -0.05em;
+}
+
+.nbrb-icon-byn {
+    display: inline-block;
+    vertical-align: baseline;
+    line-height: 1;
+}
+
+.nbrb-icon-byn:before {
+    content: "\e901";
 }

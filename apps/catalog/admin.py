@@ -1,7 +1,11 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 from .models import Category, Product
+
+# Знак белорусского рубля — глиф официального шрифта НБРБ.
+BYN_SYMBOL = mark_safe('<span class="nbrb-icon nbrb-icon-byn"></span>')
 
 
 @admin.register(Category)
@@ -17,7 +21,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['image_preview', 'name', 'category', 'price', 'available']
+    list_display = ['image_preview', 'name', 'category', 'price_display', 'available']
     list_display_links = ['name']
     list_editable = ['available']
     list_filter = ['category', 'available']
@@ -37,6 +41,10 @@ class ProductAdmin(admin.ModelAdmin):
         if obj.image:
             return mark_safe(f'<img src="{obj.image.url}" alt="" class="list-preview">')
         return '—'
+
+    @admin.display(description='Цена', ordering='price')
+    def price_display(self, obj):
+        return format_html('{} {}', obj.price, BYN_SYMBOL)
 
     @admin.action(description='Отметить как «В наличии»')
     def make_available(self, request, queryset):

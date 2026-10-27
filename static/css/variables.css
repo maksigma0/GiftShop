@@ -1,50 +1,55 @@
 :root {
-  /* Типографика: системный шрифт, логотип — декоративный */
-  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, sans-serif;
-  --font-heading: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, sans-serif;
-  --font-logo: 'Lobster', cursive;
+  /* Типографика: Inter для текста, Lobster — только для логотипа и баннерного заголовка */
+  --font-body: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --font-heading: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --font-logo: 'Lobster', 'Ruslan Display', cursive;
 
   --radius: 18px;
   --radius-sm: 14px;
   --radius-xs: 10px;
   --transition: all 0.2s ease;
 
-  /* СВЕТЛАЯ — спокойный фон, насыщенные «вкусные» акценты */
-  --bg: #F7F3EC;
+  /* СВЕТЛАЯ — новогодняя кондитерская: снежный крем, ягодный акцент, мёд */
+  --bg: #FBF6EF;
   --surface: #FFFFFF;
-  --surface-hover: #FDF8F1;
-  --primary: #2F7D4F;
-  --primary-light: #4EA36C;
-  --accent: #E07A3F;
-  --gold: #E3A72F;
-  --caramel: #C87F3F;
-  --berry: #C33C54;
-  --text: #2A241E;
-  --text-secondary: #7A6E62;
-  --border: #EAE0D2;
-  --success: #2F8C4F;
-  --danger: #C0392B;
-  --shadow: 0 1px 3px rgba(46, 42, 38, 0.05), 0 8px 24px rgba(46, 42, 38, 0.05);
-  --shadow-hover: 0 2px 6px rgba(46, 42, 38, 0.07), 0 14px 34px rgba(46, 42, 38, 0.09);
+  --card: #FFFFFF;
+  --surface-hover: #FBF0E8;
+  --primary: #9C2542;
+  --primary-light: #B84A63;
+  --accent: #C2185B;
+  --gold: #E6A817;
+  --heading-color: #E6A817;
+  --heading-color-hover: #C88F0E;
+  --caramel: #C0802E;
+  --text: #35231E;
+  --text-secondary: #8A6E60;
+  --border: #F0E0D0;
+  --success: #1F6F43;
+  --danger: #B23A3A;
+  --shadow: 0 4px 8px rgba(53, 35, 30, 0.06), 0 14px 32px rgba(53, 35, 30, 0.09);
+  --shadow-hover: 0 10px 22px rgba(53, 35, 30, 0.10), 0 26px 60px rgba(53, 35, 30, 0.15);
   --glow: none;
 }
 
 [data-theme="dark"] {
-  --bg: #1E1A16;
-  --surface: #2A2622;
-  --surface-hover: #332E28;
-  --primary: #4FBF7F;
-  --primary-light: #6FD49A;
-  --accent: #F09A5A;
-  --gold: #F0C05A;
-  --caramel: #E0A06A;
-  --berry: #E86A82;
-  --text: #F2EBE2;
-  --text-secondary: #ABA093;
-  --border: #3C352D;
-  --success: #4FBF7F;
-  --danger: #E8735F;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
-  --shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.35), 0 14px 34px rgba(0, 0, 0, 0.3);
+  /* ТЁМНАЯ — зимняя ночь: графитово-синий, ягодные и золотые акценты */
+  --bg: #10161D;
+  --surface: #1A222C;
+  --card: #1A222C;
+  --surface-hover: #212C38;
+  --primary: #B0485C;
+  --primary-light: #CB6578;
+  --accent: #E27E95;
+  --gold: #E6B45A;
+  --heading-color: #FFD77A;
+  --heading-color-hover: #FFE6A8;
+  --caramel: #E0A060;
+  --text: #F2F4F6;
+  --text-secondary: #9AA7B3;
+  --border: #2A3440;
+  --success: #5BB57F;
+  --danger: #E8837A;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.5), 0 14px 34px rgba(0, 0, 0, 0.38);
   --glow: none;
 }

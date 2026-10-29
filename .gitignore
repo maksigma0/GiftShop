@@ -1,7 +1,11 @@
-venv/
-.venv/
-__pycache__/
-*.pyc
+node_modules/
+.nuxt/
+.output/
+.data/
 .env
-db.sqlite3
-media/
+
+# База и загруженные фото — живут только на сервере
+data/
+
+# Папка для загрузки на хостинг (npm run release)
+release/

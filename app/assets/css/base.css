@@ -1,0 +1,152 @@
+/* ===== Сброс и каркас страницы ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  transition: var(--transition);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+#__nuxt {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(1.25rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Радужный переливающийся фон героев (каталог и главная) */
+.rainbow {
+  background: linear-gradient(135deg,
+    #ff9ecd 0%,
+    #ffd98e 15%,
+    #fdf6a1 30%,
+    #b6f5c1 45%,
+    #a3e8ff 60%,
+    #c6b6ff 75%,
+    #ff9ecd 100%);
+  background-size: 300% 300%;
+  animation: gradientShimmer 10s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rainbow {
+    animation: none;
+  }
+}
+
+/* ===== Знак белорусского рубля — официальный шрифт НБРБ ===== */
+@font-face {
+  font-family: "nbrb";
+  src: url("/fonts/nbrb.woff2") format("woff2"),
+       url("/fonts/nbrb.ttf") format("truetype"),
+       url("/fonts/nbrb.woff") format("woff");
+  unicode-range: U+E901, U+42, U+59, U+4E;
+}
+
+.bynSign {
+  font-family: "nbrb" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.25em;
+  margin-left: 0.25rem;
+  display: inline-block;
+  vertical-align: baseline;
+  line-height: 1;
+}
+
+.bynSign::before {
+  content: "\e901";
+}
+
+/* ===== Бейдж наличия ===== */
+.stockBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 3.125rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03125rem;
+}
+
+.stockBadge--in {
+  background: #1F6F43;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(31, 111, 67, 0.35);
+}
+
+[data-theme="dark"] .stockBadge--in {
+  background: #2E6B47;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.stockBadge--out {
+  background: rgba(178, 58, 58, 0.12);
+  color: var(--danger);
+  border: 1px solid rgba(178, 58, 58, 0.22);
+}
+
+[data-theme="dark"] .stockBadge--out {
+  background: rgba(232, 131, 122, 0.16);
+  border-color: rgba(232, 131, 122, 0.3);
+}
+
+/* ===== Общие элементы страниц ===== */
+.pageTitle {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  margin: 2rem 0 0.5rem;
+}
+
+.buttonPrimary {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.buttonPrimary:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-hover);
+}
+
+.emptyNote {
+  margin: 2.5rem 0;
+  color: var(--text-secondary);
+}

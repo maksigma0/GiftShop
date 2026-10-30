@@ -3,6 +3,7 @@ const reasons = [
   { icon: '🤲', title: 'Ручная работа', text: 'Создаем новогодние подарки вручную на любой вкус и бюджет.' },
   { icon: '🍬', title: 'Широкий ассортимент', text: 'Используем широкий ассортимент конфет ведущих фабрик белорусских производителей и стран СНГ.' },
   { icon: '🎁', title: 'Красивая упаковка', text: 'Новогодние наборы представлены в ярких подарочных упаковках.' },
+  { icon: '💳', title: 'Форма оплаты', text: 'Наличный и безналичный расчет. Действуют карты рассрочек (Халва, Карта покупок, Магнит).' },
   { icon: '🚚', title: 'Доставка', text: 'Свяжитесь с нами для уточнения условий доставки.' },
 ]
 </script>
@@ -153,11 +154,12 @@ const reasons = [
 
 .homeWhy {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1.25rem;
 }
 
 .homeWhy__card {
+  grid-column: span 2;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -165,6 +167,15 @@ const reasons = [
   text-align: center;
   box-shadow: var(--shadow);
   transition: var(--transition);
+}
+
+/* 5 карточек: 3 в первом ряду, 2 по центру во втором */
+.homeWhy__card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.homeWhy__card:nth-child(5) {
+  grid-column: 4 / span 2;
 }
 
 .homeWhy__card:hover {
@@ -212,7 +223,15 @@ const reasons = [
 
 @media (max-width: 64rem) {
   .homeWhy {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .homeWhy__card:nth-child(4) {
+    grid-column: span 2;
+  }
+
+  .homeWhy__card:nth-child(5) {
+    grid-column: 2 / span 2;
   }
 }
 
@@ -228,6 +247,12 @@ const reasons = [
 
   .homeWhy {
     grid-template-columns: 1fr;
+  }
+
+  .homeWhy__card,
+  .homeWhy__card:nth-child(4),
+  .homeWhy__card:nth-child(5) {
+    grid-column: auto;
   }
 
   .homeSection {

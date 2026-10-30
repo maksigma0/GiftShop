@@ -28,8 +28,16 @@ const { data: categories } = await useFetch('/api/categories', { key: 'categorie
         <h3 class="siteFooter__title">Контакты</h3>
         <p class="siteFooter__text">город Барань, улица Оршанская, павильон «Сладкий Мир»</p>
         <div class="siteFooter__phones">
-          <a href="tel:+375296953455" class="siteFooter__link">+375 29 695-34-55</a>
-          <a href="tel:+375292175643" class="siteFooter__link">+375 29 217-56-43</a>
+          <div class="siteFooter__phoneGroup">
+            <span class="siteFooter__op">A1</span>
+            <a href="tel:+375296953455" class="siteFooter__link">+375 29 695-34-55</a>
+            <a href="tel:+375445156792" class="siteFooter__link">+375 44 515-67-92</a>
+          </div>
+          <div class="siteFooter__phoneGroup">
+            <span class="siteFooter__op">МТС</span>
+            <a href="tel:+375336198955" class="siteFooter__link">+375 33 619-89-55</a>
+            <a href="tel:+375292947467" class="siteFooter__link">+375 29 294-74-67</a>
+          </div>
         </div>
       </div>
 
@@ -126,8 +134,22 @@ const { data: categories } = await useFetch('/api/categories', { key: 'categorie
 .siteFooter__phones {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.625rem;
   margin-top: 0.625rem;
+}
+
+.siteFooter__phoneGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.siteFooter__op {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03125rem;
+  color: var(--gold);
 }
 
 .siteFooter__phones .siteFooter__link {

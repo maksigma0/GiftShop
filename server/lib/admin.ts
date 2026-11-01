@@ -102,7 +102,7 @@ export function validateProduct(db: Database, raw: Raw, exceptId?: number): Prod
     errors.categoryId = 'Выберите категорию'
   }
   if (priceKop === null) errors.price = 'Цена в формате 15,40'
-  if (weightG === null) errors.weight = 'Вес в килограммах, например 0,45'
+  if (weightG === null) errors.weight = 'Вес в граммах, например 800'
 
   if (Object.keys(errors).length) throw new ValidationError(errors)
   return {

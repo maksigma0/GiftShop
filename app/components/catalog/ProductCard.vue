@@ -3,8 +3,10 @@ import type { Product } from '#shared/types/shop'
 
 const props = defineProps<{
   product: Product
-  /** Показывать категорию и вес (в избранном их нет, как в оригинале) */
+  /** Показывать категорию и вес */
   detailed?: boolean
+  /** Показывать вес (например, в избранном — без категории) */
+  showWeight?: boolean
 }>()
 
 const url = computed(() => `/product/${props.product.id}/${props.product.slug}`)
@@ -26,8 +28,8 @@ const url = computed(() => `/product/${props.product.id}/${props.product.slug}`)
       </h3>
       <div v-if="detailed" class="productCard__category">{{ product.category.name }}</div>
       <CatalogPrice class="productCard__price" :kop="product.priceKop" />
-      <div v-if="detailed && product.weightG" class="productCard__weight">
-        Вес: {{ formatWeightKg(product.weightG) }} кг
+      <div v-if="(detailed || showWeight) && product.weightG" class="productCard__weight">
+        Вес: {{ formatWeightG(product.weightG) }} г
       </div>
       <div class="productCard__actions">
         <CatalogWishlistButton :product-id="product.id" />
@@ -82,7 +84,8 @@ const url = computed(() => `/product/${props.product.id}/${props.product.slug}`)
 .productCard__imageWrap {
   position: relative;
   display: block;
-  aspect-ratio: 4 / 3;
+  /* Фото товаров квадратные (1:1) — рамка тоже квадратная, чтобы не обрезать */
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   /* Без этого заглушка 🎁 подчёркивается как ссылка */
   text-decoration: none;
@@ -96,12 +99,8 @@ const url = computed(() => `/product/${props.product.id}/${props.product.slug}`)
 .productCard__image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.productCard:hover .productCard__image {
-  transform: scale(1.05);
+  /* contain — фото видно целиком и пропорционально, без обрезки краёв */
+  object-fit: contain;
 }
 
 .productCard__placeholder {

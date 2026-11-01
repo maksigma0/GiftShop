@@ -20,7 +20,7 @@ const form = reactive({
   categoryId: product.value ? String(product.value.category.id) : '',
   description: product.value?.description ?? '',
   price: product.value ? formatPrice(product.value.priceKop) : '',
-  weight: product.value?.weightG ? formatWeightKg(product.value.weightG) : '',
+  weight: product.value?.weightG ? String(product.value.weightG) : '',
   available: product.value?.available ?? true,
 })
 
@@ -114,8 +114,8 @@ async function remove() {
         <AdminField label="Цена, BYN" for-id="price" :error="errors.fields.value.price">
           <input id="price" v-model="form.price" class="adminInput adminForm__short" :class="{ 'adminInput--invalid': errors.fields.value.price }" inputmode="decimal" placeholder="15,40" required>
         </AdminField>
-        <AdminField label="Вес, кг" for-id="weight" :error="errors.fields.value.weight">
-          <input id="weight" v-model="form.weight" class="adminInput adminForm__short" :class="{ 'adminInput--invalid': errors.fields.value.weight }" inputmode="decimal" placeholder="0,45">
+        <AdminField label="Вес, г" for-id="weight" :error="errors.fields.value.weight">
+          <input id="weight" v-model="form.weight" class="adminInput adminForm__short" :class="{ 'adminInput--invalid': errors.fields.value.weight }" inputmode="numeric" placeholder="800">
         </AdminField>
         <label class="adminForm__checkbox">
           <input v-model="form.available" type="checkbox"> В наличии

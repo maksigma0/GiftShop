@@ -9,9 +9,8 @@ watch(data, (value) => {
   if (value && value.ids.length !== wishlist.ids.value.length) wishlist.replace(value.ids)
 }, { immediate: true })
 
-// Убрали сердечко — товар сразу пропадает со страницы, итог пересчитывается
+// Убрали сердечко — товар сразу пропадает со страницы
 const products = computed(() => data.value?.products.filter(product => wishlist.has(product.id)) ?? [])
-const totalKop = computed(() => products.value.reduce((sum, product) => sum + product.priceKop, 0))
 </script>
 
 <template>
@@ -19,12 +18,8 @@ const totalKop = computed(() => products.value.reduce((sum, product) => sum + pr
     <h1 class="pageTitle">Избранное</h1>
 
     <template v-if="products.length">
-      <div class="wishlistTotal">
-        Итого: <CatalogPrice class="wishlistTotal__value" :kop="totalKop" />
-      </div>
-
       <div class="productGrid productGrid--wishlist">
-        <CatalogProductCard v-for="product in products" :key="product.id" :product="product" />
+        <CatalogProductCard v-for="product in products" :key="product.id" :product="product" show-weight />
       </div>
     </template>
 
@@ -38,21 +33,6 @@ const totalKop = computed(() => products.value.reduce((sum, product) => sum + pr
 </template>
 
 <style>
-.wishlistTotal {
-  font-family: var(--font-heading);
-  font-size: 1.75rem;
-  margin-bottom: 1.25rem;
-}
-
-.wishlistTotal__value {
-  color: var(--primary);
-  font-weight: 700;
-}
-
-[data-theme="dark"] .wishlistTotal__value {
-  text-shadow: 0 0 15px rgba(176, 72, 92, 0.35);
-}
-
 .productGrid--wishlist {
   grid-template-columns: repeat(3, 1fr);
   max-width: 68.75rem;

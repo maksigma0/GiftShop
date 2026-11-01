@@ -7,7 +7,8 @@ const route = useRoute()
 const query = computed(() => ({
   category: props.categorySlug || undefined,
   q: typeof route.query.q === 'string' && route.query.q.trim() ? route.query.q.trim() : undefined,
-  sort: typeof route.query.sort === 'string' && route.query.sort ? route.query.sort : undefined,
+  // По умолчанию — всегда «Сначала дешёвые»
+  sort: (typeof route.query.sort === 'string' && route.query.sort) || 'cheap',
   page: typeof route.query.page === 'string' ? route.query.page : undefined,
 }))
 
@@ -21,7 +22,7 @@ if (error.value) {
 }
 
 const search = computed(() => query.value.q ?? '')
-const sort = computed<SortOrder>(() => (query.value.sort as SortOrder) ?? '')
+const sort = computed<SortOrder>(() => query.value.sort as SortOrder)
 
 useHead(() => ({
   title: `${result.value?.category?.name ?? 'Каталог'} — Сладкий Мир`,
@@ -29,7 +30,7 @@ useHead(() => ({
 
 function changeSort(event: Event) {
   const value = (event.target as HTMLSelectElement).value
-  navigateTo({ query: { ...route.query, sort: value || undefined, page: undefined } })
+  navigateTo({ query: { ...route.query, sort: value, page: undefined } })
 }
 
 function pageLink(page: number) {
@@ -67,7 +68,6 @@ watch(() => result.value?.page, () => {
     <div class="sortBar">
       <label class="sortBar__label" for="sortSelect">Сортировка:</label>
       <select id="sortSelect" class="sortBar__select" :value="sort" @change="changeSort">
-        <option value="">По умолчанию</option>
         <option value="cheap">Сначала дешёвые</option>
         <option value="expensive">Сначала дорогие</option>
       </select>

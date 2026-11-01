@@ -16,11 +16,9 @@ const reasons = [
       </div>
       <div class="homeHero__text">
         <h1 class="homeHero__title">Сладкий Мир</h1>
-        <p class="homeHero__lead">
-          Собираем для вас новогодние подарки и кондитерские наборы — вручную и с теплом. Особое внимание уделяем
-          белорусским производителям: проверенные ингредиенты, родные вкусы и яркая праздничная упаковка. Поможем
-          выбрать подарок для близких, друзей, коллег и партнёров.
-        </p>
+        <div class="homeHero__lead">
+          Мы собираем для вас новогодние подарки и кондитерские наборы — вручную и с любовью.<br>Особое внимание уделяем белорусским производителям: проверенные ингредиенты, родные вкусы и яркая праздничная упаковка.<br>Поможем выбрать подарок для близких, друзей, коллег и партнёров.
+        </div>
         <NuxtLink class="homeHero__button" to="/catalog">Перейти в каталог</NuxtLink>
       </div>
     </div>
@@ -98,11 +96,12 @@ const reasons = [
   line-height: 1.7;
   color: #5C3A4A;
   max-width: 30rem;
-  margin-bottom: 1.75rem;
+  margin: 0;
 }
 
 .homeHero__button {
   display: inline-block;
+  margin-top: 1.75rem;
   padding: 1rem 2.25rem;
   background: var(--primary);
   color: #fff;

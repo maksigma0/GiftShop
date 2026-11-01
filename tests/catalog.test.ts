@@ -3,7 +3,7 @@ import { beforeEach, describe, test } from 'node:test'
 import { createCategory, createProduct, deleteCategory, setAvailability, validateCategory, validateProduct, ValidationError } from '../server/lib/admin.ts'
 import { getProductsByIds, listCategories, listProducts } from '../server/lib/catalog.ts'
 import { openDatabase, type Database } from '../server/lib/db.ts'
-import { formatPrice, parsePriceToKop } from '../shared/utils/format.ts'
+import { formatPrice, formatWeightG, parsePriceToKop, parseWeightToGrams } from '../shared/utils/format.ts'
 import { slugify } from '../shared/utils/slugify.ts'
 
 let db: Database
@@ -103,6 +103,14 @@ describe('форматирование', () => {
     assert.equal(parsePriceToKop('15,4'), 1540)
     assert.equal(parsePriceToKop('0.10'), 10)
     assert.equal(parsePriceToKop('1,234'), null)
+  })
+
+  test('вес в граммах', () => {
+    assert.equal(formatWeightG(800), '800')
+    assert.equal(formatWeightG(1200), '1 200')
+    assert.equal(parseWeightToGrams('800'), 800)
+    assert.equal(parseWeightToGrams(''), 0)
+    assert.equal(parseWeightToGrams('abc'), null)
   })
 
   test('slugify', () => {

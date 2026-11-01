@@ -37,7 +37,7 @@ useSeoMeta({ description: product.value.description.slice(0, 160) })
         </span>
 
         <CatalogPrice class="productDetail__price" :kop="product.priceKop" />
-        <div v-if="product.weightG" class="productCard__weight">Вес: {{ formatWeightKg(product.weightG) }} кг</div>
+        <div v-if="product.weightG" class="productCard__weight">Вес: {{ formatWeightG(product.weightG) }} г</div>
 
         <!-- white-space: pre-line сохраняет переносы строк, как linebreaksbr в Django -->
         <div v-if="product.description" class="productDetail__desc">{{ product.description }}</div>
@@ -86,7 +86,8 @@ useSeoMeta({ description: product.value.description.slice(0, 160) })
 .productDetail__img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* contain — фото товара видно целиком, без обрезки краёв */
+  object-fit: contain;
 }
 
 .productDetail__placeholder {

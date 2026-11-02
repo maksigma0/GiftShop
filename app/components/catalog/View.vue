@@ -37,10 +37,13 @@ function pageLink(page: number) {
   return { query: { ...route.query, page: page > 1 ? page : undefined } }
 }
 
-// Пагинация: плавно возвращаемся к началу сетки
+// Пагинация: возвращаемся к началу сетки.
+// flush: 'post' — скролл после замены карточек, иначе Safari обрывает анимацию,
+// когда страница укорачивается (на последней странице товаров меньше).
+// behavior: 'instant' — не даём глобальному scroll-behavior: smooth тянуть время.
 watch(() => result.value?.page, () => {
-  if (import.meta.client) window.scrollTo({ top: 0, behavior: 'smooth' })
-})
+  if (import.meta.client) window.scrollTo({ top: 0, behavior: 'instant' })
+}, { flush: 'post' })
 </script>
 
 <template>
